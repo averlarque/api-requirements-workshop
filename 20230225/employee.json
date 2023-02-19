@@ -1,0 +1,67 @@
+{
+    "employeeId": "40fad9dd-bbba-3ee2-bb98-b984adde57a5",
+    "employmentInfo": [
+        {
+            "employerRef": "813ec1e3-4952-31a6-a24d-9ff71794ae40",
+            "employmentType": "FULL-TIME",
+            "status": "ACTIVE",
+            "effectiveDate": "2020-01-01",
+            "division": "Agile Transformation",
+            "position": "BA1"
+        }
+    ],
+    "firstName": "Angela",
+    "lastName": "Davis",
+    "middleName": "",
+    "dateOfBirth": "1998-06-11",
+    "taxId": "1234-5678-2345-3456",
+    "citizenshipCd": "US",
+    "tobaccoCd": "No",
+    "addresses": [
+        {
+            "city": "City test",
+            "stateProvinceCd": "CA",
+            "postalCode": "94103",
+            "countryCd": "US",
+            "addressLine1": "Address Line 1 test",
+            "addressLine2": "",
+            "addressType": "PRIMARY"
+        }
+    ],
+    "contactInfo": {
+        "emails": [
+            {
+                "email": "adavis@bestemployer.com",
+                "emailType": "WORK",
+                "preferable": true
+            },
+            {
+                "email": "angel98@yahoo.com",
+                "emailType": "PERSONAL",
+                "preferable": false
+            }
+        ],
+        "phoneNumbers": [
+            {
+                "phoneNumber": "+167893234532",
+                "phoneNumberType": "WORK",
+                "preferable": false
+            },
+            {
+                "phoneNumber": "+167893234532",
+                "phoneNumberType": "PERSONAL",
+                "preferable": true
+            }
+        ]
+    },
+    "policyInfo": [
+        {
+            "policyType": "AccidentalHealth",
+            "policyRef": "920abbc6-509c-3413-91bd-3df1ccac5c25",
+            "premiumAmount": "150.00",
+            "premiumAmountCurrencyCode": "USD",
+            "premiumPaymentFrequency": "MONTHLY",
+            "startDate": "2023-01-02"
+        }
+    ]
+}
