@@ -1,0 +1,22 @@
+{
+    "policyId": "920abbc6-509c-3413-91bd-3df1ccac5c25",
+    "policyType": "AccidentalHealth",
+    "limitAmount": "120000",
+    "limitAmountCurrencyCd": "USD",
+    "brokerInfo": {
+        "brokerRef": "66a63699-9fe6-3f56-b0b1-7e9888cf6121",
+        "brokerCommission": 0.01,
+        "brokerCommissionCurrencyCd": "USD",
+        "brokerCommissionFrequency": "MONTHLY"
+    },
+    "employerInfo": {
+        "employerRef": "813ec1e3-4952-31a6-a24d-9ff71794ae40",
+        "premiumAmountPaymentCd": "FULL"
+    },
+    "status": "ACTIVE",
+    "effectiveDate": "2023-01-01",
+    "covers": [
+        "INJURY",
+        "SICKNESS"
+    ] 
+}
