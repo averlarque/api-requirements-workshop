@@ -1,0 +1,29 @@
+{
+    "claimId": "a194a4e1-c848-31fb-bd2e-fa481c4ca6b4",
+    "claimFileDateTime": "2023-01-10T16:23:00Z",
+    "status": "PENDING REVIEW",
+    "claimantRef": "40fad9dd-bbba-3ee2-bb98-b984adde57a5",
+    "policyRef": "920abbc6-509c-3413-91bd-3df1ccac5c25",
+    "claimReasons": [
+        "DENTAL ISSUE"
+    ],
+    "description": "I have broken my teeth",
+    "lossAmount": 500,
+    "lossCurrencyCd": "USD",
+    "lossDate": "2023-01-10",
+    "lastModified": "2023-02-17T12:22:00Z",
+    "resolution": "null",
+    "paymentLossAmount": null,
+    "paymentLossCurrencyCd": "null",
+    "uploadedReferenceIds": [
+        "26c03af4-9c94-380d-8913-e1da71c63731"
+    ],
+    "statusHistory": [
+        {
+            "statusName": "Submitted",
+            "lastModified": "2023-02-17T12:22:00Z",
+            "comment": "Can be proceeded for Review",
+            "adjusterId": "CA1230003456"
+        }
+    ]
+}
