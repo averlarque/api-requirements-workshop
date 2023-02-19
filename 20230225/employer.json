@@ -1,0 +1,19 @@
+{
+    "employerId": "813ec1e3-4952-31a6-a24d-9ff71794ae40",
+    "legalName": "Best Employer",
+    "status": "ACTIVE",
+    "countryCd": "US",
+    "legalAddress": {
+        "city": "City test",
+        "stateProvinceCd": "CA",
+        "postalCode": "94103",
+        "countryCd": "US",
+        "addressLine1": "Address Line 1 test",
+        "addressLine2": ""
+    },
+    "contactInfo": {
+        "phoneNumber": "+12345678345",
+        "email": "bestemployer@bestemployer.com"
+    },
+    "effectiveDate": "2021-08-01"
+}
