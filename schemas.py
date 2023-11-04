@@ -8,16 +8,16 @@ current_date = datetime.now().date()
 
 class CreateEmploymentInfo(BaseModel):
     employmentType: EmploymentType
-    division: str = Field(None, title='Organization division', example='R&D')
-    position: str = Field(None, title='Employee position', example='Scrum Master')
-    effectiveDate: date = Field(..., title='Start work date', example=current_date)
+    division: str = Field(None, description='Organization division', example='R&D')
+    position: str = Field(None, description='Employee position', example='Scrum Master')
+    effectiveDate: date = Field(..., description='Start work date', example=current_date)
 
 class CreateEmployee(BaseModel):
-    firstName: str = Field(..., title='First Name', example='Jay')
-    lastName: str = Field(..., title='Last Name', example='Goldberg')
-    middleName: str = Field(None, title='Middle Name', example= "")
-    dateOfBirth: date = Field(..., title='Date of Birth', example='1990-01-01')
-    taxId: str = Field(..., title='Social Security Number', example='1234-5678-2345-3456')
+    firstName: str = Field(..., description='First Name', example='Jay')
+    lastName: str = Field(..., description='Last Name', example='Goldberg')
+    middleName: str = Field(None, description='Middle Name', example= "")
+    dateOfBirth: date = Field(..., description='Date of Birth', example='1990-01-01')
+    taxId: str = Field(..., description='Social Security Number', example='1234-5678-2345-3456')
     employmentInfo: CreateEmploymentInfo
 
 class CreateEmployeeSuccess(BaseModel):
@@ -25,11 +25,11 @@ class CreateEmployeeSuccess(BaseModel):
 
 class EmploymentInfo(BaseModel):
     employmentType: EmploymentType
-    department: str
-    position: str
+    department: str = Field(None, description='Organization department', example='R&D')
+    position: str = Field(None, description='Employee position', example='Scrum Master')
     employerRef: UUID
-    startDate: date
-    endDate: date | None = None
+    startDate: date = Field(..., description='Employment start date', example=current_date)
+    endDate: date = Field(None, description='Employment end date', example="")
 
 class Address(BaseModel):
     id: UUID = Field(..., title='Address ID', examples=[
@@ -58,18 +58,23 @@ class EmployeePolicyInfo(BaseModel):
     startDate: date
 
 class Employee(BaseModel):
-    id: UUID
-    businessId: str
-    firstName: str
-    lastName: str
-    middleName: str | None = None
-    dob: date
-    taxId: str
-    addedDate: datetime
+    id: UUID = Field(..., description='Employee UID')
+    businessId: str = Field(..., description='Employee Registry Number', example='EE1023394')
+    firstName: str = Field(..., description='First Name', example='John')
+    lastName: str = Field(..., description='Last Name', example='Doe')
+    middleName: str = Field(None, description='Middle Name', example= "")
+    dob: date = Field(..., description='Date of Birth', example='1990-01-01')
+    taxId: str = Field(..., description='Social Security Number', example='1234-5678-2345-3456')
+    addedDate: datetime = Field(..., description='When Added', example=current_date)
     status: EntityStatus
     employmentInfo: EmploymentInfo
-    addresses: List[Address]
-    contactInfo: Contact
+    addresses: List[Address] | None = None
+    contactInfo: Contact | None = None
+    policies: List[EmployeePolicyInfo] | None = None
+
+class EmployeeCreateUpdate(Employee):
+    id: UUID | None = None
+    businessId: str | None = None
     
 class Policy(BaseModel):
     id: UUID

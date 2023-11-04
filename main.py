@@ -43,15 +43,23 @@ async def createEmployee(employerId: Annotated[str, Path(title='Employer UID', e
 
 # System API
 
+# Create/Update API
+@app.post("/v1/employees",
+          tags=[tags['system']],
+          summary='Create/Update Employee')
+async def createUpdateEmployee(body: EmployeeCreateUpdate) -> Employee:
+    return body
+
 # Search API
-@app.get("/v1/organization/employees",
+@app.get("/v1/employees",
          response_model=list[Employee],
-         tags=[tags['system']])
+         tags=[tags['system']],
+         summary='Search Employee via GET' )
 async def searchEmployees():
     pass
 
 # Details API
-@app.get("v1/organization/employees/{employeeId}",
+@app.get("v1/employees/{employeeId}",
          tags=[tags['system']],
          response_model=Employee)
 async def getEmployeeDetails(employeeId) -> Employee:
