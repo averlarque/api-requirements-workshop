@@ -1,0 +1,211 @@
+[
+  {
+    "id": "123e4567-e89b-12d3-a456-426655440000",
+    "businessId": "EE1023394",
+    "firstName": "John",
+    "lastName": "Doe",
+    "middleName": "Robert",
+    "dob": "1990-01-01",
+    "taxId": "1234-5678-2345-3456",
+    "addedDate": "2023-11-04",
+    "status": "ACTIVE",
+    "employmentInfo": {
+      "employmentType": "FULL-TIME",
+      "department": "R&D",
+      "position": "Scrum Master",
+      "employerRef": "e98d007f-93e6-4e5c-96fe-31d6e88d2d07",
+      "startDate": "2023-11-04",
+      "endDate": null
+    },
+    "addresses": null,
+    "contactInfo": null,
+    "policies": null
+  },
+  {
+    "id": "223e4567-e89b-12d3-a456-426655440000",
+    "businessId": "EE2023394",
+    "firstName": "Alice",
+    "lastName": "Smith",
+    "middleName": "Marie",
+    "dob": "1985-05-20",
+    "taxId": "5678-1234-9876-5432",
+    "addedDate": "2023-11-04",
+    "status": "ACTIVE",
+    "employmentInfo": {
+      "employmentType": "FULL-TIME",
+      "department": "HR",
+      "position": "HR Manager",
+      "employerRef": "e98d007f-93e6-4e5c-96fe-31d6e88d2d07",
+      "startDate": "2022-10-01",
+      "endDate": null
+    },
+    "addresses": [
+      {
+        "id": "123e4567-e89b-12d3-a456-426655440001",
+        "addressLine1": "123 Elm Street",
+        "addressLine2": "Apt 4B",
+        "city": "New York",
+        "postalCode": "10001",
+        "stateCd": "NY",
+        "countryCd": "US",
+        "type": [
+          "WORK",
+          "MAILING"
+        ]
+      }
+    ],
+    "contactInfo": {
+      "email": "alice@example.com",
+      "phone": "+1-234-567-8901",
+      "id": "123e4567-e89b-12d3-a456-426655440002",
+      "type": [
+        "PERSONAL"
+      ]
+    },
+    "policies": [
+      {
+        "policyRef": "123e4567-e89b-12d3-a456-426655440010",
+        "premiumAmount": "500.00",
+        "premiumAmountCurrencyCode": "USD",
+        "premiumPaymentFrequency": "MONTHLY",
+        "startDate": "2023-11-01"
+      },
+      {
+        "policyRef": "123e4567-e89b-12d3-a456-426655440011",
+        "premiumAmount": "1000.00",
+        "premiumAmountCurrencyCode": "USD",
+        "premiumPaymentFrequency": "YEARLY",
+        "startDate": "2023-11-01"
+      }
+    ]
+  },
+  {
+    "id": "323e4567-e89b-12d3-a456-426655440000",
+    "businessId": "EE3023394",
+    "firstName": "Ella",
+    "lastName": "Johnson",
+    "middleName": "Grace",
+    "dob": "1992-03-15",
+    "taxId": "8765-4321-9876-1234",
+    "addedDate": "2023-11-04",
+    "status": "PENDING",
+    "employmentInfo": {
+      "employmentType": "FULL-TIME",
+      "department": "Finance",
+      "position": "Financial Analyst",
+      "employerRef": "123e4567-e89b-12d3-a456-426655440020",
+      "startDate": "2023-12-01",
+      "endDate": null
+    },
+    "addresses": null,
+    "contactInfo": {
+      "email": "ella@example.com",
+      "phone": "+1-345-678-9012",
+      "id": "123e4567-e89b-12d3-a456-426655440021",
+      "type": [
+        "WORK"
+      ]
+    },
+    "policies": null
+  },
+  {
+    "id": "423e4567-e89b-12d3-a456-426655440000",
+    "businessId": "EE4023394",
+    "firstName": "James",
+    "lastName": "Brown",
+    "middleName": "William",
+    "dob": "1988-07-28",
+    "taxId": "9876-5432-1234-8765",
+    "addedDate": "2023-11-04",
+    "status": "PENDING",
+    "employmentInfo": {
+      "employmentType": "PART-TIME",
+      "department": "Marketing",
+      "position": "Marketing Coordinator",
+      "employerRef": "223e4567-e89b-12d3-a456-426655440030",
+      "startDate": "2023-11-15",
+      "endDate": null
+    },
+    "addresses": [
+      {
+        "id": "123e4567-e89b-12d3-a456-426655440003",
+        "addressLine1": "456 Oak Lane",
+        "addressLine2": "Suite 200",
+        "city": "Los Angeles",
+        "postalCode": "90001",
+        "stateCd": "CA",
+        "countryCd": "US",
+        "type": [
+          "WORK",
+          "BILLING"
+        ]
+      }
+    ],
+    "contactInfo": null,
+    "policies": null
+  },
+  {
+    "id": "523e4567-e89b-12d3-a456-426655440000",
+    "businessId": "EE5023394",
+    "firstName": "Sophia",
+    "lastName": "Miller",
+    "middleName": "Rose",
+    "dob": "1995-09-10",
+    "taxId": "2345-6789-1234-9876",
+    "addedDate": "2023-11-04",
+    "status": "DISABLED",
+    "employmentInfo": {
+      "employmentType": "FULL-TIME",
+      "department": "Sales",
+      "position": "Sales Representative",
+      "employerRef": "123e4567-e89b-12d3-a456-426655440040",
+      "startDate": "2023-10-15",
+      "endDate": "2023-12-31"
+    },
+    "addresses": [
+      {
+        "id": "123e4567-e89b-12d3-a456-426655440004",
+        "addressLine1": "789 Pine Street",
+        "addressLine2": "Apt 3C",
+        "city": "Chicago",
+        "postalCode": "60601",
+        "stateCd": "IL",
+        "countryCd": "US",
+        "type": [
+          "WORK",
+          "MAILING"
+        ]
+      },
+      {
+        "id": "123e4567-e89b-12d3-a456-426655440005",
+        "addressLine1": "987 Maple Road",
+        "addressLine2": null,
+        "city": "Houston",
+        "postalCode": "77001",
+        "stateCd": "TX",
+        "countryCd": "US",
+        "type": [
+          "BILLING"
+        ]
+      }
+    ],
+    "contactInfo": {
+      "email": "sophia@example.com",
+      "phone": "+1-456-789-0123",
+      "id": "123e4567-e89b-12d3-a456-426655440006",
+      "type": [
+        "PERSONAL",
+        "WORK"
+      ]
+    },
+    "policies": [
+      {
+        "policyRef": "123e4567-e89b-12d3-a456-426655440050",
+        "premiumAmount": "800.00",
+        "premiumAmountCurrencyCode": "USD",
+        "premiumPaymentFrequency": "MONTHLY",
+        "startDate": "2023-11-01"
+      }
+    ]
+  }
+]

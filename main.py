@@ -3,6 +3,7 @@ from schemas import *
 from uuid import uuid4, UUID
 from typing import Annotated
 from enums import EntityStatus
+import json
 
 tags = {
     "experience": "Experience API",
@@ -50,13 +51,49 @@ async def createEmployee(employerId: Annotated[str, Path(title='Employer UID', e
 async def createUpdateEmployee(body: EmployeeCreateUpdate) -> Employee:
     return body
 
-# Search API
+# GET Search API
 @app.get("/v1/employees",
          response_model=list[Employee],
          tags=[tags['system']],
          summary='Search Employee via GET' )
-async def searchEmployees():
-    pass
+async def searchEmployees(firstName: str | None = None,
+                        lastName: str | None = None,
+                        status: str | None = None,
+                        businessId: str | None = None,
+                        department: str | None = None,
+                        addedSince: date | None = None,
+                        employerId: UUID| None = None,
+                        offset: int = Query(0, title="Offset", ge=0), 
+                        limit: int = Query(10, le=100, title="Limit")):
+    with open('examples/employees.json', 'r') as file:
+        json_data = file.read()
+    parsed_data = json.loads(json_data)
+
+    result = []
+    for item in parsed_data:
+        # print(item)
+        item = Employee(**item)
+
+        # function to add item if it is unique
+        # query search item
+        if firstName is not None and firstName == item.firstName:
+            if item not in result: result.append(item)
+        if lastName is not None and lastName == item.lastName:
+            if item not in result: result.append(item)
+        if status is not None and status == item.status:
+            if item not in result: result.append(item)
+        if businessId == item.businessId:
+            if item not in result: result.append(item)
+        if department == item.employmentInfo.department:
+            if item not in result: result.append(item)
+        if (item.employmentInfo.startDate is not None and 
+            addedSince is not None and 
+            addedSince <= item.employmentInfo.startDate):
+            if item not in result: result.append(item)
+        if employerId == item.employmentInfo.employerRef:
+            if item not in result: result.append(item)
+        
+    return result
 
 # Details API
 @app.get("v1/employees/{employeeId}",

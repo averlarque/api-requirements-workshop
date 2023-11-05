@@ -29,14 +29,14 @@ class EmploymentInfo(BaseModel):
     position: str = Field(None, description='Employee position', example='Scrum Master')
     employerRef: UUID
     startDate: date = Field(..., description='Employment start date', example=current_date)
-    endDate: date = Field(None, description='Employment end date', example="")
+    endDate: date | None = Field(None, description='Employment end date', example="")
 
 class Address(BaseModel):
     id: UUID = Field(..., title='Address ID', examples=[
                      '913ec1e3-4952-31a6-a24d-9ff71794ae40'])
     addressLine1: str = Field(..., title='Address Line 1', examples=[
                               '22 Acacia Avenue'])
-    addressLine2: str = Field(None, title='Address Line 1')
+    addressLine2: str | None = Field(None, title='Address Line 1')
     city: str = Field(..., examples=['Salt Lake City'])
     postalCode: str = Field(..., examples=['84130'])
     stateCd: str = Field(
@@ -65,7 +65,7 @@ class Employee(BaseModel):
     middleName: str = Field(None, description='Middle Name', example= "")
     dob: date = Field(..., description='Date of Birth', example='1990-01-01')
     taxId: str = Field(..., description='Social Security Number', example='1234-5678-2345-3456')
-    addedDate: datetime = Field(..., description='When Added', example=current_date)
+    addedDate: date = Field(..., description='When Added', example=current_date)
     status: EntityStatus
     employmentInfo: EmploymentInfo
     addresses: List[Address] | None = None
