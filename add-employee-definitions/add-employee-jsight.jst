@@ -1,0 +1,44 @@
+JSIGHT 0.3
+
+INFO
+  Title "09.11.23 Webinar API Examples - Add Employee"
+  Version 1.0.0
+  Description 
+    API implementation examples for 2nd part of IIBA Belarus Chapter webinar 'Requirements & API'
+
+
+POST /v1/employer/{employerId}/employee/create // Create a new Employee with minimal attributes
+  Description
+    **Experience API** for HR app allowing to add a new [Employee](https://www.merriam-webster.com/dictionary/employee) in a simplified way.
+
+  Path
+    {
+      "employerId": "61d88819-6965-464c-9c41-3d9cc9545148" // {type: "uuid"} - Employer UID
+    }
+
+  Query "status=ACTIVE"
+    {
+      "status": "ACTIVE" // {optional: true, enum: ["ACTIVE", "DISABLED", "PENDING"]} - Set an Employee status
+    }
+  
+  Request
+    {
+      "firstName": "Jay", // {type: "string"} - First Name
+      "lastName": "Goldberg", // {type: "string"} - Last Name
+      "middleName": "", // {optional: true, type: "string"} - Middle Name
+      "dateOfBirth": "1990-01-01", // {type: "date"} - Date of Birth
+      "taxId": "1234-5678-2345-3456", // {type: "string"} - Social Security Number
+      "employmentInfo": [
+        {
+          "employmentType": "PART-TIME", // {enum: ["PART-TIME", "FULL-TIME"]}
+          "division": "R&D", // {optional: true, type: "string"} - Organization Division
+          "position": "Scrum Master", // {optional: true, type: "string"} - Employee Position
+          "effectiveDate": "2023-11-07" // {type: "date"} - Start Work Date
+        }
+      ]
+    }
+
+  200
+    {
+      "employeeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6" // {type: "uuid"} - Employee UID
+    }

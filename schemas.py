@@ -8,9 +8,9 @@ current_date = datetime.now().date()
 
 class CreateEmploymentInfo(BaseModel):
     employmentType: EmploymentType
-    division: str = Field(None, description='Organization division', example='R&D')
-    position: str = Field(None, description='Employee position', example='Scrum Master')
-    effectiveDate: date = Field(..., description='Start work date', example=current_date)
+    division: str = Field(None, description='Organization Division', example='R&D')
+    position: str = Field(None, description='Employee Position', example='Scrum Master')
+    effectiveDate: date = Field(..., description='Start Work Date', example=current_date)
 
 class CreateEmployee(BaseModel):
     firstName: str = Field(..., description='First Name', example='Jay')
@@ -21,15 +21,15 @@ class CreateEmployee(BaseModel):
     employmentInfo: List[CreateEmploymentInfo]
 
 class CreateEmployeeSuccess(BaseModel):
-    employeeId: UUID = Field(..., title="Employee UID")
+    employeeId: UUID = Field(..., description="Employee UID")
 
 class EmploymentInfo(BaseModel):
     employmentType: EmploymentType
-    department: str = Field(None, description='Organization department', example='R&D')
-    position: str = Field(None, description='Employee position', example='Scrum Master')
+    department: str = Field(None, description='Organization Department', example='R&D')
+    position: str = Field(None, description='Employee Position', example='Scrum Master')
     employerRef: UUID
-    startDate: date = Field(..., description='Employment start date', example=current_date)
-    endDate: date | None = Field(None, description='Employment end date', example="")
+    startDate: date = Field(..., description='Employment Start Date', example=current_date)
+    endDate: date | None = Field(None, description='Employment End Date', example="")
 
 class Address(BaseModel):
     id: UUID = Field(..., title='Address ID', examples=[

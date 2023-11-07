@@ -28,7 +28,7 @@
                             "type": "string",
                             "title": "Employer UID"
                         },
-                        "example": "61d88819-6965-464c-9c41-3d9cc9545148"
+                        "example": "e9ef7ff2-abed-4912-92ea-ff09495f8f4d"
                     },
                     {
                         "name": "status",
@@ -138,7 +138,8 @@
                     "employeeId": {
                         "type": "string",
                         "format": "uuid",
-                        "title": "Employee UID"
+                        "title": "Employeeid",
+                        "description": "Employee UID"
                     }
                 },
                 "type": "object",
@@ -155,20 +156,20 @@
                     "division": {
                         "type": "string",
                         "title": "Division",
-                        "description": "Organization division",
+                        "description": "Organization Division",
                         "example": "R&D"
                     },
                     "position": {
                         "type": "string",
                         "title": "Position",
-                        "description": "Employee position",
+                        "description": "Employee Position",
                         "example": "Scrum Master"
                     },
                     "effectiveDate": {
                         "type": "string",
                         "format": "date",
                         "title": "Effectivedate",
-                        "description": "Start work date",
+                        "description": "Start Work Date",
                         "example": "2023-11-07"
                     }
                 },
