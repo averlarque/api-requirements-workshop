@@ -11,7 +11,7 @@ tags = {
 }
 
 app = FastAPI(
-    title='09.11.23 Webinar API Examples',
+    title='09.11.23 Webinar API Examples - Practical case',
     version = '1.0.0',
     description="API implementation examples for 2nd part of IIBA Belarus Chapter webinar 'Requirements & API'",
     contact={
@@ -29,7 +29,9 @@ random_uuid = str(uuid4())
 
 @app.post("/v1/employer/{employerId}/employee/create",
           tags=[tags['experience']],
-          summary='Create a new Employee with minimal attributes')
+          summary='Create a new Employee with minimal attributes',
+          description='''**Experience API** for HR app allowing to add a new [Employee](https://www.merriam-webster.com/dictionary/employee) in a simplified way. Create a new Employee record associated with a specific Employer. Employee uniqueness is checked by a combination of firstName, lastName, dateOfBirth, taxId.\n 
+          System API: POST /v1/employees''')
 async def createEmployee(employerId: Annotated[str, Path(title='Employer UID', example=random_uuid )],
                          body: CreateEmployee, 
                          status: EntityStatus = EntityStatus.active) -> CreateEmployeeSuccess:

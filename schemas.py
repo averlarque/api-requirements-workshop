@@ -18,7 +18,7 @@ class CreateEmployee(BaseModel):
     middleName: str = Field(None, description='Middle Name', example= "")
     dateOfBirth: date = Field(..., description='Date of Birth', example='1990-01-01')
     taxId: str = Field(..., description='Social Security Number', example='1234-5678-2345-3456')
-    employmentInfo: CreateEmploymentInfo
+    employmentInfo: List[CreateEmploymentInfo]
 
 class CreateEmployeeSuccess(BaseModel):
     employeeId: UUID = Field(..., title="Employee UID")
@@ -64,10 +64,10 @@ class Employee(BaseModel):
     lastName: str = Field(..., description='Last Name', example='Doe')
     middleName: str = Field(None, description='Middle Name', example= "")
     dob: date = Field(..., description='Date of Birth', example='1990-01-01')
-    taxId: str = Field(..., description='Social Security Number', example='1234-5678-2345-3456')
+    ssn: str = Field(..., description='Social Security Number', example='1234-5678-2345-3456')
     addedDate: date = Field(..., description='When Added', example=current_date)
-    status: EntityStatus
-    employmentInfo: EmploymentInfo
+    state: EntityStatus
+    employmentInfo: List[EmploymentInfo]
     addresses: List[Address] | None = None
     contactInfo: Contact | None = None
     policies: List[EmployeePolicyInfo] | None = None

@@ -1,0 +1,247 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "09.11.23 Webinar API Examples - Add Employee",
+        "description": "API implementation examples for 2nd part of IIBA Belarus Chapter webinar 'Requirements & API'",
+        "contact": {
+            "name": "Ilya Zakharau",
+            "url": "https://ilyazakharau.com/",
+            "email": "ilya.zakharau@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/v1/employer/{employerId}/employee/create": {
+            "post": {
+                "tags": [
+                    "Experience API"
+                ],
+                "summary": "Create a new Employee with minimal attributes",
+                "description": "**Experience API** for HR app allowing to add a new [Employee](https://www.merriam-webster.com/dictionary/employee) in a simplified way.",
+                "operationId": "createEmployee_v1_employer__employerId__employee_create_post",
+                "parameters": [
+                    {
+                        "name": "employerId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Employer UID"
+                        },
+                        "example": "61d88819-6965-464c-9c41-3d9cc9545148"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/EntityStatus"
+                                }
+                            ],
+                            "default": "ACTIVE",
+                            "title": "Status"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateEmployee"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateEmployeeSuccess"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateEmployee": {
+                "properties": {
+                    "firstName": {
+                        "type": "string",
+                        "title": "Firstname",
+                        "description": "First Name",
+                        "example": "Jay"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "title": "Lastname",
+                        "description": "Last Name",
+                        "example": "Goldberg"
+                    },
+                    "middleName": {
+                        "type": "string",
+                        "title": "Middlename",
+                        "description": "Middle Name",
+                        "example": ""
+                    },
+                    "dateOfBirth": {
+                        "type": "string",
+                        "format": "date",
+                        "title": "Dateofbirth",
+                        "description": "Date of Birth",
+                        "example": "1990-01-01"
+                    },
+                    "taxId": {
+                        "type": "string",
+                        "title": "Taxid",
+                        "description": "Social Security Number",
+                        "example": "1234-5678-2345-3456"
+                    },
+                    "employmentInfo": {
+                        "items": {
+                            "$ref": "#/components/schemas/CreateEmploymentInfo"
+                        },
+                        "type": "array",
+                        "title": "Employmentinfo"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "firstName",
+                    "lastName",
+                    "dateOfBirth",
+                    "taxId",
+                    "employmentInfo"
+                ],
+                "title": "CreateEmployee"
+            },
+            "CreateEmployeeSuccess": {
+                "properties": {
+                    "employeeId": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Employee UID"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "employeeId"
+                ],
+                "title": "CreateEmployeeSuccess"
+            },
+            "CreateEmploymentInfo": {
+                "properties": {
+                    "employmentType": {
+                        "$ref": "#/components/schemas/EmploymentType"
+                    },
+                    "division": {
+                        "type": "string",
+                        "title": "Division",
+                        "description": "Organization division",
+                        "example": "R&D"
+                    },
+                    "position": {
+                        "type": "string",
+                        "title": "Position",
+                        "description": "Employee position",
+                        "example": "Scrum Master"
+                    },
+                    "effectiveDate": {
+                        "type": "string",
+                        "format": "date",
+                        "title": "Effectivedate",
+                        "description": "Start work date",
+                        "example": "2023-11-07"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "employmentType",
+                    "effectiveDate"
+                ],
+                "title": "CreateEmploymentInfo"
+            },
+            "EmploymentType": {
+                "type": "string",
+                "enum": [
+                    "PART-TIME",
+                    "FULL-TIME"
+                ],
+                "title": "EmploymentType"
+            },
+            "EntityStatus": {
+                "type": "string",
+                "enum": [
+                    "ACTIVE",
+                    "DISABLED",
+                    "PENDING"
+                ],
+                "title": "EntityStatus"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        }
+    }
+}
