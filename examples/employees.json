@@ -1,143 +1,152 @@
 [
   {
-    "id": "123e4567-e89b-12d3-a456-426655440000",
+    "id": "35376743-84d8-4f69-bb10-3eb54830b5d1",
     "businessId": "EE1023394",
     "firstName": "John",
     "lastName": "Doe",
-    "middleName": "Robert",
+    "middleName": "",
     "dob": "1990-01-01",
-    "taxId": "1234-5678-2345-3456",
+    "ssn": "1234-5678-2345-3456",
     "addedDate": "2023-11-04",
-    "status": "ACTIVE",
-    "employmentInfo": {
-      "employmentType": "FULL-TIME",
-      "department": "R&D",
-      "position": "Scrum Master",
-      "employerRef": "e98d007f-93e6-4e5c-96fe-31d6e88d2d07",
-      "startDate": "2023-11-04",
-      "endDate": null
-    },
+    "state": "ACTIVE",
+    "employmentInfo": [
+      {
+        "employmentType": "FULL-TIME",
+        "department": "R&D",
+        "position": "Scrum Master",
+        "employerRef": "913ec1e3-4952-31a6-a24d-9ff71794ae40",
+        "startDate": "2023-11-04",
+        "endDate": null
+      }
+    ],
     "addresses": null,
-    "contactInfo": null,
+    "contactInfo": {
+      "email": "john.doe@example.com",
+      "phone": "+1 (123) 456-7890",
+      "id": "babe76c7-e1f5-4f8a-9361-97f1d6e7b49d",
+      "type": [
+        "WORK",
+        "PERSONAL"
+      ]
+    },
     "policies": null
   },
   {
-    "id": "223e4567-e89b-12d3-a456-426655440000",
-    "businessId": "EE2023394",
+    "id": "08e8b303-7145-4b9f-a5f6-e8f53e05834e",
+    "businessId": "EE1023394",
     "firstName": "Alice",
     "lastName": "Smith",
-    "middleName": "Marie",
-    "dob": "1985-05-20",
-    "taxId": "5678-1234-9876-5432",
+    "middleName": "",
+    "dob": "1985-04-15",
+    "ssn": "9876-5432-1234-8765",
     "addedDate": "2023-11-04",
-    "status": "ACTIVE",
-    "employmentInfo": {
-      "employmentType": "FULL-TIME",
-      "department": "HR",
-      "position": "HR Manager",
-      "employerRef": "e98d007f-93e6-4e5c-96fe-31d6e88d2d07",
-      "startDate": "2022-10-01",
-      "endDate": null
-    },
+    "state": "ACTIVE",
+    "employmentInfo": [
+      {
+        "employmentType": "PART-TIME",
+        "department": "HR",
+        "position": "HR Manager",
+        "employerRef": "913ec1e3-4952-31a6-a24d-9ff71794ae40",
+        "startDate": "2023-10-15",
+        "endDate": null
+      }
+    ],
     "addresses": [
       {
-        "id": "123e4567-e89b-12d3-a456-426655440001",
-        "addressLine1": "123 Elm Street",
-        "addressLine2": "Apt 4B",
-        "city": "New York",
-        "postalCode": "10001",
-        "stateCd": "NY",
+        "id": "913ec1e3-4952-31a6-a24d-9ff71794ae40",
+        "addressLine1": "22 Acacia Avenue",
+        "addressLine2": "Apt 101",
+        "city": "Salt Lake City",
+        "postalCode": "84130",
+        "stateCd": "UT",
         "countryCd": "US",
         "type": [
-          "WORK",
-          "MAILING"
+          "LEGAL",
+          "WORK"
         ]
       }
     ],
     "contactInfo": {
-      "email": "alice@example.com",
-      "phone": "+1-234-567-8901",
-      "id": "123e4567-e89b-12d3-a456-426655440002",
-      "type": [
-        "PERSONAL"
-      ]
-    },
-    "policies": [
-      {
-        "policyRef": "123e4567-e89b-12d3-a456-426655440010",
-        "premiumAmount": "500.00",
-        "premiumAmountCurrencyCode": "USD",
-        "premiumPaymentFrequency": "MONTHLY",
-        "startDate": "2023-11-01"
-      },
-      {
-        "policyRef": "123e4567-e89b-12d3-a456-426655440011",
-        "premiumAmount": "1000.00",
-        "premiumAmountCurrencyCode": "USD",
-        "premiumPaymentFrequency": "YEARLY",
-        "startDate": "2023-11-01"
-      }
-    ]
-  },
-  {
-    "id": "323e4567-e89b-12d3-a456-426655440000",
-    "businessId": "EE3023394",
-    "firstName": "Ella",
-    "lastName": "Johnson",
-    "middleName": "Grace",
-    "dob": "1992-03-15",
-    "taxId": "8765-4321-9876-1234",
-    "addedDate": "2023-11-04",
-    "status": "PENDING",
-    "employmentInfo": {
-      "employmentType": "FULL-TIME",
-      "department": "Finance",
-      "position": "Financial Analyst",
-      "employerRef": "123e4567-e89b-12d3-a456-426655440020",
-      "startDate": "2023-12-01",
-      "endDate": null
-    },
-    "addresses": null,
-    "contactInfo": {
-      "email": "ella@example.com",
-      "phone": "+1-345-678-9012",
-      "id": "123e4567-e89b-12d3-a456-426655440021",
+      "email": "jane.smith@example.com",
+      "phone": "+1 (987) 654-3210",
+      "id": "72e97cf5-0e19-49d2-bbdd-8934c1d5312b",
       "type": [
         "WORK"
       ]
     },
-    "policies": null
+    "policies": [
+      {
+        "policyRef": "513c4563-1ad7-46da-9910-7d7e8fdfb899",
+        "premiumAmount": "100.00",
+        "premiumAmountCurrencyCode": "USD",
+        "premiumPaymentFrequency": "Monthly",
+        "startDate": "2023-11-04"
+      }
+    ]
   },
   {
-    "id": "423e4567-e89b-12d3-a456-426655440000",
-    "businessId": "EE4023394",
-    "firstName": "James",
-    "lastName": "Brown",
-    "middleName": "William",
-    "dob": "1988-07-28",
-    "taxId": "9876-5432-1234-8765",
+    "id": "4a4653aa-0497-43d4-9c2a-8625a8d0fed1",
+    "businessId": "EE1023395",
+    "firstName": "Bob",
+    "lastName": "Johnson",
+    "middleName": "",
+    "dob": "1988-07-22",
+    "ssn": "5678-1234-9876-4321",
     "addedDate": "2023-11-04",
-    "status": "PENDING",
-    "employmentInfo": {
-      "employmentType": "PART-TIME",
-      "department": "Marketing",
-      "position": "Marketing Coordinator",
-      "employerRef": "223e4567-e89b-12d3-a456-426655440030",
-      "startDate": "2023-11-15",
-      "endDate": null
-    },
+    "state": "ACTIVE",
+    "employmentInfo": [
+      {
+        "employmentType": "FULL-TIME",
+        "department": "Sales",
+        "position": "Sales Representative",
+        "employerRef": "913ec1e3-4952-31a6-a24d-9ff71794ae40",
+        "startDate": "2023-09-01",
+        "endDate": null
+      }
+    ],
+    "addresses": null,
+    "contactInfo": null,
+    "policies": [
+      {
+        "policyRef": "99887766-5432-1012-2101-112233445566",
+        "premiumAmount": "75.50",
+        "premiumAmountCurrencyCode": "USD",
+        "premiumPaymentFrequency": "Quarterly",
+        "startDate": "2023-10-15"
+      }
+    ]
+  },
+  {
+    "id": "efbb4731-d3c6-42d9-825e-92dd27841a4b",
+    "businessId": "EE1023396",
+    "firstName": "Laura",
+    "lastName": "Williams",
+    "middleName": "",
+    "dob": "1992-12-30",
+    "ssn": "2345-6789-9876-5432",
+    "addedDate": "2023-11-04",
+    "state": "ACTIVE",
+    "employmentInfo": [
+      {
+        "employmentType": "FULL-TIME",
+        "department": "Marketing",
+        "position": "Marketing Specialist",
+        "employerRef": "913ec1e3-4952-31a6-a24d-9ff71794ae40",
+        "startDate": "2023-08-15",
+        "endDate": null
+      }
+    ],
     "addresses": [
       {
-        "id": "123e4567-e89b-12d3-a456-426655440003",
-        "addressLine1": "456 Oak Lane",
-        "addressLine2": "Suite 200",
+        "id": "813ec1e3-4952-31a6-a24d-9ff71794ae41",
+        "addressLine1": "123 Elm Street",
+        "addressLine2": null,
         "city": "Los Angeles",
         "postalCode": "90001",
         "stateCd": "CA",
         "countryCd": "US",
         "type": [
-          "WORK",
-          "BILLING"
+          "PERSONAL"
         ]
       }
     ],
@@ -145,66 +154,56 @@
     "policies": null
   },
   {
-    "id": "523e4567-e89b-12d3-a456-426655440000",
-    "businessId": "EE5023394",
-    "firstName": "Sophia",
-    "lastName": "Miller",
-    "middleName": "Rose",
-    "dob": "1995-09-10",
-    "taxId": "2345-6789-1234-9876",
+    "id": "5441bfb2-9999-4725-965e-1935471a627d",
+    "businessId": "EE1023397",
+    "firstName": "David",
+    "lastName": "Brown",
+    "middleName": "",
+    "dob": "1987-03-10",
+    "ssn": "3456-2345-8765-9876",
     "addedDate": "2023-11-04",
-    "status": "DISABLED",
-    "employmentInfo": {
-      "employmentType": "FULL-TIME",
-      "department": "Sales",
-      "position": "Sales Representative",
-      "employerRef": "123e4567-e89b-12d3-a456-426655440040",
-      "startDate": "2023-10-15",
-      "endDate": "2023-12-31"
-    },
+    "state": "ACTIVE",
+    "employmentInfo": [
+      {
+        "employmentType": "PART-TIME",
+        "department": "Finance",
+        "position": "Accountant",
+        "employerRef": "913ec1e3-4952-31a6-a24d-9ff71794ae40",
+        "startDate": "2023-11-01",
+        "endDate": null
+      }
+    ],
     "addresses": [
       {
-        "id": "123e4567-e89b-12d3-a456-426655440004",
-        "addressLine1": "789 Pine Street",
-        "addressLine2": "Apt 3C",
-        "city": "Chicago",
-        "postalCode": "60601",
-        "stateCd": "IL",
+        "id": "713ec1e3-4952-31a6-a24d-9ff71794ae42",
+        "addressLine1": "456 Oak Road",
+        "addressLine2": "Unit 303",
+        "city": "New York",
+        "postalCode": "10001",
+        "stateCd": "NY",
         "countryCd": "US",
         "type": [
-          "WORK",
+          "BILLING",
           "MAILING"
-        ]
-      },
-      {
-        "id": "123e4567-e89b-12d3-a456-426655440005",
-        "addressLine1": "987 Maple Road",
-        "addressLine2": null,
-        "city": "Houston",
-        "postalCode": "77001",
-        "stateCd": "TX",
-        "countryCd": "US",
-        "type": [
-          "BILLING"
         ]
       }
     ],
     "contactInfo": {
-      "email": "sophia@example.com",
-      "phone": "+1-456-789-0123",
-      "id": "123e4567-e89b-12d3-a456-426655440006",
+      "email": "contact@company.com",
+      "phone": "+1 (555) 123-4567",
+      "id": "2db1de25-6c75-40b7-a063-5f4a50568e68",
       "type": [
-        "PERSONAL",
-        "WORK"
+        "WORK",
+        "BILLING"
       ]
     },
     "policies": [
       {
-        "policyRef": "123e4567-e89b-12d3-a456-426655440050",
-        "premiumAmount": "800.00",
+        "policyRef": "77788899-1212-3434-5678-909090909090",
+        "premiumAmount": "250.75",
         "premiumAmountCurrencyCode": "USD",
-        "premiumPaymentFrequency": "MONTHLY",
-        "startDate": "2023-11-01"
+        "premiumPaymentFrequency": "Annual",
+        "startDate": "2024-01-20"
       }
     ]
   }

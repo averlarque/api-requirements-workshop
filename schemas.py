@@ -29,33 +29,32 @@ class EmploymentInfo(BaseModel):
     position: str = Field(None, description='Employee Position', example='Scrum Master')
     employerRef: UUID
     startDate: date = Field(..., description='Employment Start Date', example=current_date)
-    endDate: date | None = Field(None, description='Employment End Date', example="")
+    endDate: date | None = Field(None, description='Employment End Date')
 
 class Address(BaseModel):
-    id: UUID = Field(..., title='Address ID', examples=[
-                     '913ec1e3-4952-31a6-a24d-9ff71794ae40'])
-    addressLine1: str = Field(..., title='Address Line 1', examples=[
-                              '22 Acacia Avenue'])
-    addressLine2: str | None = Field(None, title='Address Line 1')
-    city: str = Field(..., examples=['Salt Lake City'])
-    postalCode: str = Field(..., examples=['84130'])
+    id: UUID = Field(..., description='Address UID')
+    addressLine1: str = Field(..., description='Address Line 1', example=
+                              '22 Acacia Avenue')
+    addressLine2: str | None = Field(None, description='Address Line 2')
+    city: str = Field(..., description="City Name", example='Salt Lake City')
+    postalCode: str = Field(..., description="ZIP/Postal Code", example='84130')
     stateCd: str = Field(
-        None, examples=['UT'], description='US States abbreviation')
+        None, example='UT', description='US States abbreviation')
     countryCd: str = Field("US", description="ISO Country code")
     type: List[AddressContactType]
 
 class Contact(BaseModel):
-    email: str
-    phone: str
-    id: str
+    email: str = Field(..., description="Email", example= "name@domain.com")
+    phone: str = Field(..., description="Phone Number", example='+1-233-435-656')
+    id: UUID = Field(..., description="Contcact UID")
     type: List[AddressContactType]
 
 class EmployeePolicyInfo(BaseModel):
     policyRef: UUID
-    premiumAmount: str
-    premiumAmountCurrencyCode: str
-    premiumPaymentFrequency: str
-    startDate: date
+    premiumAmount: str = Field(..., description="Premium Payment Amount", example="50.00")
+    premiumAmountCurrencyCode: str = Field(..., description="Currency ISO Code", example="USD")
+    premiumPaymentFrequency: str = Field(..., description="Payment Frequency", example="BI-WEEKLY")
+    startDate: date = Field(..., description="Policy Effective Date")
 
 class Employee(BaseModel):
     id: UUID = Field(..., description='Employee UID')
@@ -78,14 +77,36 @@ class EmployeeCreateUpdate(Employee):
     
 class Policy(BaseModel):
     id: UUID
+    businessId: str
     policyType: PolicyType
     limitAmount: float
     limitAmountCurrencyCd: str = "USD"
     status: EntityStatus
     effectiveDate: date
 
+class DateQuery(BaseModel):
+    frm: date | datetime | None = None
+    to: date | datetime | None = None
+    matches: List[date] | List[datetime] | None
+
+class PolicySearch(BaseModel):
+    id: List[UUID] | None = None
+    businessId: List[str] | None = None
+    policyType: List[PolicyType] | None = None
+    status: List[EntityStatus] | None = None
+    effectiveDate: DateQuery | None = None
+
+class ClaimSearch(BaseModel):
+    id: List[UUID] | None = None
+    businessId: List[str] | None = None
+    claimantRef: List[UUID] | None = None
+    status: List[EntityStatus] | None = None
+    effectiveDate: DateQuery | None = None
+    policyRef: List[UUID] | None = None
+
 class Claim(BaseModel):
     id: UUID
+    businessId: str
     claimantRef: UUID
     status: EntityStatus
     policyRef: UUID
@@ -94,3 +115,19 @@ class Claim(BaseModel):
     lossAmountCurrencyCd: str = "USD"
     status: EntityStatus
     effectiveDate: date
+
+class Pagination(BaseModel):
+    offset: int
+    limit: int
+
+class EmployeeSearchResult(BaseModel):
+    result: List[Employee]
+    pagination: Pagination
+
+class ClaimSearchResult(BaseModel):
+    result: List[Claim]
+    pagination: Pagination
+
+class PolicySearchResult(BaseModel):
+    result: List[Policy]
+    pagination: Pagination

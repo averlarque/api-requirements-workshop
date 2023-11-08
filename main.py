@@ -55,9 +55,9 @@ async def createUpdateEmployee(body: EmployeeCreateUpdate) -> Employee:
 
 # GET Search API
 @app.get("/v1/employees",
-         response_model=list[Employee],
+         response_model=EmployeeSearchResult,
          tags=[tags['system']],
-         summary='Search Employee via GET' )
+         summary='Search Employee with GET' )
 async def searchEmployees(firstName: str | None = None,
                         lastName: str | None = None,
                         status: str | None = None,
@@ -66,40 +66,73 @@ async def searchEmployees(firstName: str | None = None,
                         addedSince: date | None = None,
                         employerId: UUID| None = None,
                         offset: int = Query(0, title="Offset", ge=0), 
-                        limit: int = Query(10, le=100, title="Limit")):
+                        limit: int = Query(10, le=100, title="Limit"),
+                        sort_by: str = Query("lastName", description="Sort items by field"),
+                        order: str = Query("asc", description="Sort order (asc or desc)")):
     with open('examples/employees.json', 'r') as file:
         json_data = file.read()
     parsed_data = json.loads(json_data)
 
     result = []
+
+    if any((firstName, lastName, status, businessId, department, addedSince, employerId)):
+        for item_data in parsed_data:
+            item = Employee(**item_data)
+
+            # Apply filtering logic based on query parameters
+            if ((not firstName or firstName == item.firstName) and
+                (not lastName or lastName == item.lastName) and
+                (not status or status == item.status) and
+                (not businessId or businessId == item.businessId) and
+                (not department or department == item.employmentInfo.department) and
+                (not addedSince or (item.employmentInfo.startDate is not None and addedSince <= item.employmentInfo.startDate)) and
+                (not employerId or employerId == item.employmentInfo.employerRef)):
+                result.append(item)
+    else:
+        # No query parameters provided, return the full list
+        for item_data in parsed_data:
+            item = Employee(**item_data)
+            result.append(item)    
+        
+    return EmployeeSearchResult(result=result, pagination=Pagination(offset=offset, limit=limit))
+
+# Details API
+@app.get("/v1/employees/{employeeId}",
+         tags=[tags['system']],
+         response_model=Employee,
+         summary='Retrieve Employee Details')
+async def getEmployeeDetails(employeeId: UUID) -> Employee:
+    with open('examples/employees.json', 'r') as file:
+        json_data = file.read()
+    parsed_data = json.loads(json_data)
+    result = None
     for item in parsed_data:
         # print(item)
         item = Employee(**item)
-
-        # function to add item if it is unique
-        # query search item
-        if firstName is not None and firstName == item.firstName:
-            if item not in result: result.append(item)
-        if lastName is not None and lastName == item.lastName:
-            if item not in result: result.append(item)
-        if status is not None and status == item.status:
-            if item not in result: result.append(item)
-        if businessId == item.businessId:
-            if item not in result: result.append(item)
-        if department == item.employmentInfo.department:
-            if item not in result: result.append(item)
-        if (item.employmentInfo.startDate is not None and 
-            addedSince is not None and 
-            addedSince <= item.employmentInfo.startDate):
-            if item not in result: result.append(item)
-        if employerId == item.employmentInfo.employerRef:
-            if item not in result: result.append(item)
-        
+        if employeeId == item.id:
+            result = item
+            print(item.id)
+            break
+    else:
+        raise HTTPException(status_code=404, detail='Employer is not found')
     return result
 
-# Details API
-@app.get("v1/employees/{employeeId}",
-         tags=[tags['system']],
-         response_model=Employee)
-async def getEmployeeDetails(employeeId) -> Employee:
+# Search policies
+@app.post("/v1/policies",
+        tags=[tags['system']],
+        response_model=PolicySearchResult,
+        summary='Searh Policies')
+async def searchPolicies(body: PolicySearch,
+                        offset: int = Query(0, title="Offset", ge=0), 
+                        limit: int = Query(10, le=100, title="Limit")):
+    pass
+
+# Search claims
+@app.post("/v1/claims",
+        tags=[tags['system']],
+        response_model=ClaimSearchResult,
+        summary='Searh Claims')
+async def searchPolicies(body: ClaimSearch,
+                        offset: int = Query(0, title="Offset", ge=0), 
+                        limit: int = Query(10, le=100, title="Limit")):
     pass
