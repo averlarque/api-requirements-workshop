@@ -1,0 +1,1522 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "09.11.23 Webinar API Examples - Practical case",
+        "description": "API implementation examples for 2nd part of IIBA Belarus Chapter webinar 'Requirements & API'",
+        "contact": {
+            "name": "Ilya Zakharau",
+            "url": "https://ilyazakharau.com/",
+            "email": "ilya.zakharau@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/v1/employer/{employerId}/employee/create": {
+            "post": {
+                "tags": [
+                    "Experience API"
+                ],
+                "summary": "Create a new Employee with minimal attributes",
+                "description": "**Experience API** for HR app allowing to add a new [Employee](https://www.merriam-webster.com/dictionary/employee) in a simplified way. Create a new Employee record associated with a specific Employer. Employee uniqueness is checked by a combination of firstName, lastName, dateOfBirth, taxId.\n \n          System API: POST /v1/employees",
+                "operationId": "createEmployee_v1_employer__employerId__employee_create_post",
+                "parameters": [
+                    {
+                        "name": "employerId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "title": "Employer UID"
+                        },
+                        "example": "639823be-6cc9-499c-8391-325d069517e3"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/components/schemas/EntityStatus"
+                                }
+                            ],
+                            "default": "ACTIVE",
+                            "title": "Status"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateEmployee"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateEmployeeSuccess"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/employees": {
+            "post": {
+                "tags": [
+                    "System API"
+                ],
+                "summary": "Create/Update Employee",
+                "operationId": "createUpdateEmployee_v1_employees_post",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EmployeeCreateUpdate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employee"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "System API"
+                ],
+                "summary": "Search Employee with GET",
+                "operationId": "searchEmployees_v1_employees_get",
+                "parameters": [
+                    {
+                        "name": "firstName",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Firstname"
+                        }
+                    },
+                    {
+                        "name": "lastName",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Lastname"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Status"
+                        }
+                    },
+                    {
+                        "name": "businessId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Businessid"
+                        }
+                    },
+                    {
+                        "name": "department",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Department"
+                        }
+                    },
+                    {
+                        "name": "addedSince",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Addedsince"
+                        }
+                    },
+                    {
+                        "name": "employerId",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "type": "string",
+                                    "format": "uuid"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ],
+                            "title": "Employerid"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "title": "Offset",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "title": "Limit",
+                            "default": 10
+                        }
+                    },
+                    {
+                        "name": "sort_by",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "Sort items by field",
+                            "default": "lastName",
+                            "title": "Sort By"
+                        },
+                        "description": "Sort items by field"
+                    },
+                    {
+                        "name": "order",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "Sort order (asc or desc)",
+                            "default": "asc",
+                            "title": "Order"
+                        },
+                        "description": "Sort order (asc or desc)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EmployeeSearchResult"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/employees/{employeeId}": {
+            "get": {
+                "tags": [
+                    "System API"
+                ],
+                "summary": "Retrieve Employee Details",
+                "operationId": "getEmployeeDetails_v1_employees__employeeId__get",
+                "parameters": [
+                    {
+                        "name": "employeeId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid",
+                            "title": "Employeeid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employee"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/policies": {
+            "post": {
+                "tags": [
+                    "System API"
+                ],
+                "summary": "Searh Policies",
+                "operationId": "searchPolicies_v1_policies_post",
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "title": "Offset",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "title": "Limit",
+                            "default": 10
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PolicySearch"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PolicySearchResult"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/claims": {
+            "post": {
+                "tags": [
+                    "System API"
+                ],
+                "summary": "Searh Claims",
+                "operationId": "searchPolicies_v1_claims_post",
+                "parameters": [
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "title": "Offset",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 100,
+                            "title": "Limit",
+                            "default": 10
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ClaimSearch"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ClaimSearchResult"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/HTTPValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Address": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Id",
+                        "description": "Address UID"
+                    },
+                    "addressLine1": {
+                        "type": "string",
+                        "title": "Addressline1",
+                        "description": "Address Line 1",
+                        "example": "22 Acacia Avenue"
+                    },
+                    "addressLine2": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Addressline2",
+                        "description": "Address Line 2"
+                    },
+                    "city": {
+                        "type": "string",
+                        "title": "City",
+                        "description": "City Name",
+                        "example": "Salt Lake City"
+                    },
+                    "postalCode": {
+                        "type": "string",
+                        "title": "Postalcode",
+                        "description": "ZIP/Postal Code",
+                        "example": "84130"
+                    },
+                    "stateCd": {
+                        "type": "string",
+                        "title": "Statecd",
+                        "description": "US States abbreviation",
+                        "example": "UT"
+                    },
+                    "countryCd": {
+                        "type": "string",
+                        "title": "Countrycd",
+                        "description": "ISO Country code",
+                        "default": "US"
+                    },
+                    "type": {
+                        "items": {
+                            "$ref": "#/components/schemas/AddressContactType"
+                        },
+                        "type": "array",
+                        "title": "Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "addressLine1",
+                    "city",
+                    "postalCode",
+                    "type"
+                ],
+                "title": "Address"
+            },
+            "AddressContactType": {
+                "type": "string",
+                "enum": [
+                    "LEGAL",
+                    "WORK",
+                    "PERSONAL",
+                    "BILLING",
+                    "MAILING"
+                ],
+                "title": "AddressContactType"
+            },
+            "Claim": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Id",
+                        "description": "Claim UID"
+                    },
+                    "businessId": {
+                        "type": "string",
+                        "title": "Businessid",
+                        "description": "Claim Business ID",
+                        "example": "C109109"
+                    },
+                    "claimantRef": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Claimantref"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/EntityStatus"
+                    },
+                    "policyRef": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Policyref"
+                    },
+                    "reason": {
+                        "type": "string",
+                        "title": "Reason"
+                    },
+                    "lossAmount": {
+                        "type": "number",
+                        "title": "Lossamount",
+                        "description": "Claim Loss Amount",
+                        "example": 500.0
+                    },
+                    "lossAmountCurrencyCd": {
+                        "type": "string",
+                        "title": "Lossamountcurrencycd",
+                        "default": "USD"
+                    },
+                    "effectiveDate": {
+                        "type": "string",
+                        "format": "date",
+                        "title": "Effectivedate"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "businessId",
+                    "claimantRef",
+                    "status",
+                    "policyRef",
+                    "reason",
+                    "lossAmount",
+                    "effectiveDate"
+                ],
+                "title": "Claim"
+            },
+            "ClaimSearch": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id"
+                    },
+                    "businessId": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Businessid"
+                    },
+                    "claimantRef": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Claimantref"
+                    },
+                    "status": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/EntityStatus"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Status"
+                    },
+                    "effectiveDate": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/DateQuery"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "policyRef": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Policyref"
+                    }
+                },
+                "type": "object",
+                "title": "ClaimSearch"
+            },
+            "ClaimSearchResult": {
+                "properties": {
+                    "result": {
+                        "items": {
+                            "$ref": "#/components/schemas/Claim"
+                        },
+                        "type": "array",
+                        "title": "Result"
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Pagination"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "result",
+                    "pagination"
+                ],
+                "title": "ClaimSearchResult"
+            },
+            "Contact": {
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "title": "Email",
+                        "description": "Email",
+                        "example": "name@domain.com"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "title": "Phone",
+                        "description": "Phone Number",
+                        "example": "+1-233-435-656"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Id",
+                        "description": "Contcact UID"
+                    },
+                    "type": {
+                        "items": {
+                            "$ref": "#/components/schemas/AddressContactType"
+                        },
+                        "type": "array",
+                        "title": "Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "email",
+                    "phone",
+                    "id",
+                    "type"
+                ],
+                "title": "Contact"
+            },
+            "CreateEmployee": {
+                "properties": {
+                    "firstName": {
+                        "type": "string",
+                        "title": "Firstname",
+                        "description": "First Name",
+                        "example": "Jay"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "title": "Lastname",
+                        "description": "Last Name",
+                        "example": "Goldberg"
+                    },
+                    "middleName": {
+                        "type": "string",
+                        "title": "Middlename",
+                        "description": "Middle Name",
+                        "example": ""
+                    },
+                    "dateOfBirth": {
+                        "type": "string",
+                        "format": "date",
+                        "title": "Dateofbirth",
+                        "description": "Date of Birth",
+                        "example": "1990-01-01"
+                    },
+                    "taxId": {
+                        "type": "string",
+                        "title": "Taxid",
+                        "description": "Social Security Number",
+                        "example": "1234-5678-2345-3456"
+                    },
+                    "employmentInfo": {
+                        "items": {
+                            "$ref": "#/components/schemas/CreateEmploymentInfo"
+                        },
+                        "type": "array",
+                        "title": "Employmentinfo"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "firstName",
+                    "lastName",
+                    "dateOfBirth",
+                    "taxId",
+                    "employmentInfo"
+                ],
+                "title": "CreateEmployee"
+            },
+            "CreateEmployeeSuccess": {
+                "properties": {
+                    "employeeId": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Employeeid",
+                        "description": "Employee UID"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "employeeId"
+                ],
+                "title": "CreateEmployeeSuccess"
+            },
+            "CreateEmploymentInfo": {
+                "properties": {
+                    "employmentType": {
+                        "$ref": "#/components/schemas/EmploymentType"
+                    },
+                    "division": {
+                        "type": "string",
+                        "title": "Division",
+                        "description": "Organization Division",
+                        "example": "R&D"
+                    },
+                    "position": {
+                        "type": "string",
+                        "title": "Position",
+                        "description": "Employee Position",
+                        "example": "Scrum Master"
+                    },
+                    "effectiveDate": {
+                        "type": "string",
+                        "format": "date",
+                        "title": "Effectivedate",
+                        "description": "Start Work Date",
+                        "example": "2023-11-08"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "employmentType",
+                    "effectiveDate"
+                ],
+                "title": "CreateEmploymentInfo"
+            },
+            "DateQuery": {
+                "properties": {
+                    "frm": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date"
+                            },
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Frm"
+                    },
+                    "to": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date"
+                            },
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "To"
+                    },
+                    "matches": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "items": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Matches"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "matches"
+                ],
+                "title": "DateQuery"
+            },
+            "Employee": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Id",
+                        "description": "Employee UID"
+                    },
+                    "businessId": {
+                        "type": "string",
+                        "title": "Businessid",
+                        "description": "Employee Registry Number",
+                        "example": "EE1023394"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "title": "Firstname",
+                        "description": "First Name",
+                        "example": "John"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "title": "Lastname",
+                        "description": "Last Name",
+                        "example": "Doe"
+                    },
+                    "middleName": {
+                        "type": "string",
+                        "title": "Middlename",
+                        "description": "Middle Name",
+                        "example": ""
+                    },
+                    "dob": {
+                        "type": "string",
+                        "format": "date",
+                        "title": "Dob",
+                        "description": "Date of Birth",
+                        "example": "1990-01-01"
+                    },
+                    "ssn": {
+                        "type": "string",
+                        "title": "Ssn",
+                        "description": "Social Security Number",
+                        "example": "1234-5678-2345-3456"
+                    },
+                    "addedDate": {
+                        "type": "string",
+                        "format": "date",
+                        "title": "Addeddate",
+                        "description": "When Added",
+                        "example": "2023-11-08"
+                    },
+                    "state": {
+                        "$ref": "#/components/schemas/EntityStatus"
+                    },
+                    "employmentInfo": {
+                        "items": {
+                            "$ref": "#/components/schemas/EmploymentInfo"
+                        },
+                        "type": "array",
+                        "title": "Employmentinfo"
+                    },
+                    "addresses": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/Address"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Addresses"
+                    },
+                    "contactInfo": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/Contact"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "policies": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/EmployeePolicyInfo"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Policies"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "businessId",
+                    "firstName",
+                    "lastName",
+                    "dob",
+                    "ssn",
+                    "addedDate",
+                    "state",
+                    "employmentInfo"
+                ],
+                "title": "Employee"
+            },
+            "EmployeeCreateUpdate": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "uuid"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id"
+                    },
+                    "businessId": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Businessid"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "title": "Firstname",
+                        "description": "First Name",
+                        "example": "John"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "title": "Lastname",
+                        "description": "Last Name",
+                        "example": "Doe"
+                    },
+                    "middleName": {
+                        "type": "string",
+                        "title": "Middlename",
+                        "description": "Middle Name",
+                        "example": ""
+                    },
+                    "dob": {
+                        "type": "string",
+                        "format": "date",
+                        "title": "Dob",
+                        "description": "Date of Birth",
+                        "example": "1990-01-01"
+                    },
+                    "ssn": {
+                        "type": "string",
+                        "title": "Ssn",
+                        "description": "Social Security Number",
+                        "example": "1234-5678-2345-3456"
+                    },
+                    "addedDate": {
+                        "type": "string",
+                        "format": "date",
+                        "title": "Addeddate",
+                        "description": "When Added",
+                        "example": "2023-11-08"
+                    },
+                    "state": {
+                        "$ref": "#/components/schemas/EntityStatus"
+                    },
+                    "employmentInfo": {
+                        "items": {
+                            "$ref": "#/components/schemas/EmploymentInfo"
+                        },
+                        "type": "array",
+                        "title": "Employmentinfo"
+                    },
+                    "addresses": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/Address"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Addresses"
+                    },
+                    "contactInfo": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/Contact"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    },
+                    "policies": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/EmployeePolicyInfo"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Policies"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "firstName",
+                    "lastName",
+                    "dob",
+                    "ssn",
+                    "addedDate",
+                    "state",
+                    "employmentInfo"
+                ],
+                "title": "EmployeeCreateUpdate"
+            },
+            "EmployeePolicyInfo": {
+                "properties": {
+                    "policyRef": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Policyref"
+                    },
+                    "premiumAmount": {
+                        "type": "string",
+                        "title": "Premiumamount",
+                        "description": "Premium Payment Amount",
+                        "example": "50.00"
+                    },
+                    "premiumAmountCurrencyCode": {
+                        "type": "string",
+                        "title": "Premiumamountcurrencycode",
+                        "description": "Currency ISO Code",
+                        "example": "USD"
+                    },
+                    "premiumPaymentFrequency": {
+                        "type": "string",
+                        "title": "Premiumpaymentfrequency",
+                        "description": "Payment Frequency",
+                        "example": "BI-WEEKLY"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "format": "date",
+                        "title": "Startdate",
+                        "description": "Policy Effective Date"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "policyRef",
+                    "premiumAmount",
+                    "premiumAmountCurrencyCode",
+                    "premiumPaymentFrequency",
+                    "startDate"
+                ],
+                "title": "EmployeePolicyInfo"
+            },
+            "EmployeeSearchResult": {
+                "properties": {
+                    "result": {
+                        "items": {
+                            "$ref": "#/components/schemas/Employee"
+                        },
+                        "type": "array",
+                        "title": "Result"
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Pagination"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "result",
+                    "pagination"
+                ],
+                "title": "EmployeeSearchResult"
+            },
+            "EmploymentInfo": {
+                "properties": {
+                    "employmentType": {
+                        "$ref": "#/components/schemas/EmploymentType"
+                    },
+                    "department": {
+                        "type": "string",
+                        "title": "Department",
+                        "description": "Organization Department",
+                        "example": "R&D"
+                    },
+                    "position": {
+                        "type": "string",
+                        "title": "Position",
+                        "description": "Employee Position",
+                        "example": "Scrum Master"
+                    },
+                    "employerRef": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Employerref"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "format": "date",
+                        "title": "Startdate",
+                        "description": "Employment Start Date",
+                        "example": "2023-11-08"
+                    },
+                    "endDate": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Enddate",
+                        "description": "Employment End Date"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "employmentType",
+                    "employerRef",
+                    "startDate"
+                ],
+                "title": "EmploymentInfo"
+            },
+            "EmploymentType": {
+                "type": "string",
+                "enum": [
+                    "PART-TIME",
+                    "FULL-TIME"
+                ],
+                "title": "EmploymentType"
+            },
+            "EntityStatus": {
+                "type": "string",
+                "enum": [
+                    "ACTIVE",
+                    "DISABLED",
+                    "PENDING"
+                ],
+                "title": "EntityStatus"
+            },
+            "HTTPValidationError": {
+                "properties": {
+                    "detail": {
+                        "items": {
+                            "$ref": "#/components/schemas/ValidationError"
+                        },
+                        "type": "array",
+                        "title": "Detail"
+                    }
+                },
+                "type": "object",
+                "title": "HTTPValidationError"
+            },
+            "Pagination": {
+                "properties": {
+                    "offset": {
+                        "type": "integer",
+                        "title": "Offset"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "title": "Limit"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "offset",
+                    "limit"
+                ],
+                "title": "Pagination"
+            },
+            "Policy": {
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "title": "Id",
+                        "description": "Policy UID"
+                    },
+                    "businessId": {
+                        "type": "string",
+                        "title": "Businessid",
+                        "description": "Policy Business ID",
+                        "example": "P109109"
+                    },
+                    "policyType": {
+                        "$ref": "#/components/schemas/PolicyType"
+                    },
+                    "limitAmount": {
+                        "type": "number",
+                        "title": "Limitamount",
+                        "description": "Policy Limit Payment Amount",
+                        "example": 10000.0
+                    },
+                    "limitAmountCurrencyCd": {
+                        "type": "string",
+                        "title": "Limitamountcurrencycd",
+                        "default": "USD"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/EntityStatus"
+                    },
+                    "effectiveDate": {
+                        "type": "string",
+                        "format": "date",
+                        "title": "Effectivedate"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "id",
+                    "businessId",
+                    "policyType",
+                    "limitAmount",
+                    "status",
+                    "effectiveDate"
+                ],
+                "title": "Policy"
+            },
+            "PolicySearch": {
+                "properties": {
+                    "id": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Id"
+                    },
+                    "businessId": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Businessid"
+                    },
+                    "policyType": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/PolicyType"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Policytype"
+                    },
+                    "status": {
+                        "anyOf": [
+                            {
+                                "items": {
+                                    "$ref": "#/components/schemas/EntityStatus"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Status"
+                    },
+                    "effectiveDate": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/components/schemas/DateQuery"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ]
+                    }
+                },
+                "type": "object",
+                "title": "PolicySearch"
+            },
+            "PolicySearchResult": {
+                "properties": {
+                    "result": {
+                        "items": {
+                            "$ref": "#/components/schemas/Policy"
+                        },
+                        "type": "array",
+                        "title": "Result"
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Pagination"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "result",
+                    "pagination"
+                ],
+                "title": "PolicySearchResult"
+            },
+            "PolicyType": {
+                "type": "string",
+                "enum": [
+                    "ACCIDENTAL HEALTH",
+                    "HOSPITAL INDEMNITY",
+                    "LIFE"
+                ],
+                "title": "PolicyType"
+            },
+            "ValidationError": {
+                "properties": {
+                    "loc": {
+                        "items": {
+                            "anyOf": [
+                                {
+                                    "type": "string"
+                                },
+                                {
+                                    "type": "integer"
+                                }
+                            ]
+                        },
+                        "type": "array",
+                        "title": "Location"
+                    },
+                    "msg": {
+                        "type": "string",
+                        "title": "Message"
+                    },
+                    "type": {
+                        "type": "string",
+                        "title": "Error Type"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "loc",
+                    "msg",
+                    "type"
+                ],
+                "title": "ValidationError"
+            }
+        }
+    }
+}

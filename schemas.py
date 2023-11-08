@@ -76,10 +76,10 @@ class EmployeeCreateUpdate(Employee):
     businessId: str | None = None
     
 class Policy(BaseModel):
-    id: UUID
-    businessId: str
+    id: UUID = Field(..., description="Policy UID")
+    businessId: str = Field(..., description="Policy Business ID", example="P109109")
     policyType: PolicyType
-    limitAmount: float
+    limitAmount: float = Field(..., description="Policy Limit Payment Amount", example=10000.00)
     limitAmountCurrencyCd: str = "USD"
     status: EntityStatus
     effectiveDate: date
@@ -105,13 +105,13 @@ class ClaimSearch(BaseModel):
     policyRef: List[UUID] | None = None
 
 class Claim(BaseModel):
-    id: UUID
-    businessId: str
+    id: UUID = Field(..., description="Claim UID")
+    businessId: str = Field(..., description="Claim Business ID", example="C109109")
     claimantRef: UUID
     status: EntityStatus
     policyRef: UUID
     reason: str
-    lossAmount: float
+    lossAmount: float = Field(..., description="Claim Loss Amount", example=500.00)
     lossAmountCurrencyCd: str = "USD"
     status: EntityStatus
     effectiveDate: date
