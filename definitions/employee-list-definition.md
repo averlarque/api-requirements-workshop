@@ -10,7 +10,7 @@ Luckily, we have such APIs:
 
 - GET /v1/employees
 - POST /v1/policies
-- POST /v1/policies
+- POST /v1/claims
 
 See full [OAS definition](/definitions/complete-oas.json) to see docs or run this repository.
 
